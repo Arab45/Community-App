@@ -1,27 +1,24 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, SafeAreaView, Image } from "react-native";
-import { images } from "./demoImage/splashImage";
+
+import { StyleSheet, Text, View, SafeAreaView, StatusBar, Platform } from "react-native";
+import Form from "./Component/navigation/customForm";
+
 export default function App() {
+
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
-        {/* <Text>Open up App.js to start working on your app!</Text> */}
-        <Image source={images.Rectangle} resizeMode="container" style={{colo,  borderWidth: 1, borderColor: 'red', backgroundColor: 'blue'}}/>
-        <StatusBar style="auto" />
-      </View>''
+    <SafeAreaView style={styles.header}>
+      <StatusBar style="auto" />
+    <Form name= "Welcome back"/>
     </SafeAreaView>
   );
 }
 
 
-
 const styles = StyleSheet.create({
-  container: {
+  header: {
     flex: 1,
-    backgroundColor: "#fff",
-    // alignItems: "center",
-    // justifyContent: "center",
-    // fontSize: 8,
-    // fontFamily: "Roboto-Italic-VariableFont_wdth,wght"
-  },
+    // backgroundColor: "#5d1ab2",
+    // marginTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
+    // alignItems: 'center',
+    // justifyContent: 'center'
+  }
 });
