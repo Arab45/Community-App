@@ -1,4 +1,6 @@
 import React from "react";
+import { Formik } from "formik";
+import * as Yup from "yup";
 import {
   View,
   Text,
@@ -9,23 +11,81 @@ import {
   Pressable,
 } from "react-native";
 
+const logInSchema = Yup.object().shape({
+  email: Yup.string()
+    .email("Invalid email")
+    .required("please provide a valid email."),
+  password: Yup.string()
+    .min(8)
+    .required("please enter your password.")
+    .matches(
+      /^(?=.*?^[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^*+-]).{8,}$/,
+      "must contain minimum 8 characters, at least one uppercase letter"
+    ),
+});
+
 export default function Form({ name }) {
   return (
     <View style={styles.header}>
       <View style={styles.triangle}>
         <Text style={styles.TriangleText}>Community App</Text>
       </View>
-      <Text style={styles.community}>{name}</Text>
-      <View style={styles.General}>
-        <View style={styles.mainTextInput}>
-          <TextInput style={styles.textBox} placeholder="Email Address" />
-          <TextInput style={styles.textBox} placeholder="Password" secureTextEntry={true}/>
-          <Pressable style={styles.Button}>
-            <Text style={styles.login}>Login</Text>
-          </Pressable>
-        </View>
-        <Text style={styles.footerText}>Forget Password?</Text>
-      </View>
+
+      <Formik
+        initialValues={{
+          email: "",
+          password: "",
+        }}
+        validationSchema={logInSchema}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          setFieldTouched,
+          isValid,
+          handleSubmit,
+        }) => { return(
+          <View style={styles.General}>
+            <Text style={styles.community}>{name}</Text>
+            <View style={styles.mainTextInput}>
+              {/* <View> */}
+                <TextInput
+                  style={styles.textBox}
+                  placeholder="Email Address"
+                  value={values.email}
+                  onChangeText={handleChange('email')}
+                  onBlur={() => setFieldTouched("email")}
+                />
+                {touched.email && errors.email && (
+                  <Text style={styles.errorText}>{errors.email}</Text>
+                )}
+              {/* </View> */}
+
+              {/* <View> */}
+                <TextInput
+                  style={styles.textBox}
+                  placeholder="Password"
+                  secureTextEntry={true}
+                  value={values.password}
+                  onChangeText={handleChange('password')}
+                  onBlur={() => setFieldTouched("password")}
+                />
+                {touched.password && errors.password && (
+                  <Text style={styles.errorText}>{errors.password}</Text>
+                )}
+              {/* </View> */}
+              <Pressable style={styles.Button}>
+                <Text style={styles.login}>Login</Text>
+              </Pressable>
+            </View>
+            <Text style={styles.footerText}>Forget Password?</Text>
+          </View>
+        )
+        }}
+      </Formik>
+      <View></View>
     </View>
   );
 }
@@ -34,10 +94,10 @@ const styles = StyleSheet.create({
   header: {
     flex: 1,
     backgroundColor: "#fff",
-    marginTop: StatusBar.currentHeight,
-    gap: 50,
+    // marginTop: StatusBar.currentHeight,
+    // gap: 50,
     // alignItems: 'center',
-    // justifyContent: 'center'
+    justifyContent: "space-between",
   },
   triangle: {
     backgroundColor: "#5d1ab2",
@@ -49,7 +109,7 @@ const styles = StyleSheet.create({
   community: {
     fontSize: 24,
     fontWeight: "bold",
-    paddingHorizontal: 20,
+    marginBottom: 8,
   },
   TriangleText: {
     fontSize: 24,
@@ -59,10 +119,10 @@ const styles = StyleSheet.create({
   },
   textBox: {
     // borderWidth: 1,
-    height: 50,
+    height: 55,
     borderColor: "#000",
     paddingHorizontal: 10,
-    backgroundColor: '#ddd'
+    backgroundColor: "#ddd",
   },
   mainTextInput: {
     gap: 20,
@@ -71,12 +131,12 @@ const styles = StyleSheet.create({
   footerText: {
     color: "#ddd",
     fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center'
+    fontWeight: "bold",
+    textAlign: "center",
   },
   Button: {
     backgroundColor: "#5d1ab2",
-    height: 50,
+    height: 55,
     justifyContent: "center",
   },
   login: {
@@ -86,7 +146,11 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   General: {
-    paddingHorizontal: 20, 
-    gap: 10
-  }
+    paddingHorizontal: 10,
+    gap: 10,
+  },
+  errorText: {
+    fontSize: 6,
+    color: "red",
+  },
 });

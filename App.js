@@ -1,24 +1,19 @@
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import SignUp from './Component/navigation/signUp';
+import Login from './Component/navigation/login';
 
-import { StyleSheet, Text, View, SafeAreaView, StatusBar, Platform } from "react-native";
-import Form from "./Component/navigation/customForm";
+const Stack = createNativeStackNavigator();
+
 
 export default function App() {
-
-  return (
-    <SafeAreaView style={styles.header}>
-      <StatusBar style="auto" />
-    <Form name= "Welcome back"/>
-    </SafeAreaView>
-  );
-}
-
-
-const styles = StyleSheet.create({
-  header: {
-    flex: 1,
-    // backgroundColor: "#5d1ab2",
-    // marginTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
-    // alignItems: 'center',
-    // justifyContent: 'center'
+    return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName='SignUp' screenOptions={{headerShown: false }}>
+          <Stack.Screen name='SignUp' component={SignUp}/>
+          <Stack.Screen name='Login' component={Login}/>
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
   }
-});
+  

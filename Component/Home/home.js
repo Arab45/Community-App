@@ -1,8 +1,10 @@
 // import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, SafeAreaView, StatusBar, Platform } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 
 
-export default function App() {
+export default function Home() {
+  const navigation = useNavigation();
 
   return (
     <SafeAreaView style={styles.header}>
@@ -18,10 +20,6 @@ console.log(height);
 const styles = StyleSheet.create({
   header: {
     flex: 1,
-    backgroundColor: "#5d1ab2",
-    marginTop: Platform.OS == "android" ? StatusBar.currentHeight : null,
-    alignItems: 'center',
-    justifyContent: 'center'
   },
   community: {
     fontSize: 24,
