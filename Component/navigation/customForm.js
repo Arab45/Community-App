@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
     borderColor: "#000",
     paddingHorizontal: 10,
     backgroundColor: "#ddd",
+    borderRadius: 5
   },
   mainTextInput: {
     gap: 20,
@@ -130,7 +131,7 @@ const styles = StyleSheet.create({
   },
   footerText: {
     color: "#ddd",
-    fontSize: 24,
+    fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
   },
@@ -138,6 +139,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#5d1ab2",
     height: 55,
     justifyContent: "center",
+    borderRadius: 5
   },
   login: {
     fontSize: 20,
@@ -146,8 +148,8 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   General: {
-    paddingHorizontal: 10,
-    gap: 10,
+    paddingHorizontal: 20,
+    gap: 20,
   },
   errorText: {
     fontSize: 6,

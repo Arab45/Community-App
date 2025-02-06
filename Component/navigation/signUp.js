@@ -168,11 +168,13 @@ const styles = StyleSheet.create({
     height: 55,
     backgroundColor: "#ddd",
     paddingHorizontal: 10,
+    borderRadius: 5
   },
   Buttom: {
     backgroundColor: "#5d1ab2",
     justifyContent: "center",
     height: 55,
+    borderRadius: 5
   },
   signUpButtom: {
     fontSize: 24,
@@ -181,11 +183,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   parentForm: {
-    paddingHorizontal: 10,
-    gap: 10,
+    paddingHorizontal: 20,
+    gap: 20,
   },
   errorText: {
-    fontSize: 6,
+    fontSize: 8,
     color: "red"
   }
 });
